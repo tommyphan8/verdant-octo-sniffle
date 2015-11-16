@@ -18,10 +18,25 @@ class BinaryGate(LogicGate):
         self.pinB = None
 
     def getPinA(self):
-        return int(input("Enter Pin A input for gate " + self.getLabel() + "-->"))
+        if self.pinA == None:
+            return int(input("Enter Pin A input for gate " + self.getLabel() + "-->"))
+        else:
+            return self.pinA.getFrom().getOutput()
 
     def getPinB(self):
-        return int(input("Enter Pin B input for gate " + self.getLabel() + "-->"))
+        if self.pinB == None:
+            return int(input("Enter Pin B input for gate " + self.getLabel() + "-->"))
+        else:
+            return self.pinB.getFrom().getOutput()
+
+    def setNextPin(self,source):
+        if self.pinA == None:
+            self.pinA = source
+        else:
+            if self.pinB == None:
+                self.pinB = source
+            else:
+               raise RuntimeError("Error: NO EMPTY PINS")
 
 class UnaryGate(LogicGate):
     def __init__(self, n):
@@ -60,3 +75,18 @@ class NotGate(UnaryGate):
             return 0
         else:
             return 1
+
+class Connector:
+    def __init__(self, fGate, tGate):
+        self.fromGate = fGate
+        self.toGate = tGate
+
+        tGate.setNextPin(self)
+        
+    def getFrom(self):
+        return self.fromGate
+
+    def getTo(self):
+        return self.toGate
+
+
