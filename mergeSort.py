@@ -12,7 +12,7 @@ def mergeSort(l):
         b = mergeSort(l[mid:])
         return merge(a,b)
         
-
+#assume pop front is o1, if not then it will be on^2
 def merge(a,b):
     temp = []
     while(len(a) + len(b) > 0):
@@ -28,7 +28,28 @@ def merge(a,b):
                 temp.append(b[0])
                 b.pop(0)
     return temp
+
+def merge1(a,b):
+    temp = []
+    i = 0
+    j = 0
+    while(len(a) > i and len(b) > j):
+        if(a[i] < b[j]):
+            temp.append(a[i])
+            i = i + 1
+        else:
+            temp.append(b[j])
+            j = j + 1
+    while(i < len(a)):
+        temp.append(a[i])
+        i = i + 1
     
+    while(j < len(b)):
+        temp.append(b[j])
+        j = j + 1
+    return temp
+
+
 print(l)
 print(mergeSort(l))
 

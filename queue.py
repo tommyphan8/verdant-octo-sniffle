@@ -19,17 +19,18 @@ class Queue:
             print(self.dequeue())
 
 
-def hotPotato(nameList, num):
+def hotPotato(l, count):
     q = Queue()
-    
-    for x in nameList:
-        q.enqueue(x)
-    
-    temp = None
-    while (q.size() > 0):
-        for x in range(num):
-            q.enqueue(q.dequeue())
+    q.items = l
+    num = 0
+    while(q.size() != 1):
         temp = q.dequeue()
-    return temp
+        if(num != count):
+            q.enqueue(temp)
+            num += 1
+        else:
+            num = 0
+    return(q.dequeue())
+print(hotPotato(["Bill","David","Susan","Jane","Kent"],4))
 
 print(hotPotato(["Bill","David","Susan","Jane","Kent","Brad"],7))
