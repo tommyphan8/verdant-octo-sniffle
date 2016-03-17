@@ -18,7 +18,7 @@ class sort:
         while left < right:
             print(l)
             #we will search for value greater than pivot
-            while l[left] < pivot and left < hi:
+            while l[left] <= pivot and left < hi:
                 left += 1
             while l[right] > pivot:
                 right -=1
